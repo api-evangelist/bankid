@@ -1,0 +1,146 @@
+Developers
+==========
+
+Here you find everything you need to implement the BankID services in a secure and user friendly way.
+
+## Optional
+
+- [Digital ID Card OpenAPI spec](https://developers.bankid.com/assets/openapi/openapi-id-card-v2.yaml): Full OpenAPI specification for the /rp/v1/verify endpoint.
+
+- [Auth & Sign OpenAPI spec](https://developers.bankid.com/assets/openapi/openapi-auth-sign-6.1.11.yaml): Full OpenAPI specification for /auth, /sign, /collect, /cancel, /payment and related endpoints.
+
+## Pages
+
+- [Home](https://developers.bankid.com/): A site for developers integrating BankID into e-services of companies and public authorities. 
+
+- [Support](https://developers.bankid.com/support): FAQ and information on how to get help. 
+
+## Getting started
+
+- [Introduction](https://developers.bankid.com/getting-started/introduction): Description of the service and good-to-know information before you start. 
+
+- [Environments](https://developers.bankid.com/getting-started/environments): Read about the test and production environments.
+
+## Order certificate
+
+- [Request a certificate ](https://developers.bankid.com/getting-started/order-certificate/request-a-certificate): How to get your certificate to be able to use the service. 
+
+- [Create PKCS#12 / PFX file](https://developers.bankid.com/getting-started/order-certificate/create-file): How to create the PKCS#12 file for your certificate. 
+
+## Use cases
+
+- [Mobile BankID on the same device](https://developers.bankid.com/use-cases/mobile-bankid-on-the-same-device): Use case descriptions for when a service is visited on the same device as the BankID is used on.
+
+- [Mobile BankID on another device](https://developers.bankid.com/use-cases/mobile-bankid-on-another-device): Use case description for the BankID flow when the user visits a service on one device and use their BankID on another device. 
+
+- [Verification of digital ID card](https://developers.bankid.com/use-cases/verification-of-digital-id-card): Use case description and flow chart for verification of a digital ID card. 
+
+- [Fallback](https://developers.bankid.com/use-cases/fallback): To provide the best solution for the user a fallback option is recommended. See an example here.
+
+## How-to guides
+
+- [Autostart](https://developers.bankid.com/how-to-guides/autostart): How to start the BankID clients using autostart. 
+
+- [QR code](https://developers.bankid.com/how-to-guides/qr-code): How to start the BankID clients using QR code. 
+
+- [Return URL](https://developers.bankid.com/how-to-guides/return-url): Find out how to use a returnURL to bring the user back to your service. 
+
+- [Verifying signatures](https://developers.bankid.com/how-to-guides/verifying-signatures): How signatures work for the different functions in the service
+
+- [Risk indication](https://developers.bankid.com/how-to-guides/risk-indication): Risk indication computes a risk value as low, medium or high and return this to your service. Learn more!
+
+- [Extra control](https://developers.bankid.com/how-to-guides/extra-control): Your service can request an enhancement in the form of an extra control of the user’s identity for selected orders. Learn more!
+
+- [Warnings ](https://developers.bankid.com/how-to-guides/warnings): How to use warnings for payment UI in BankID. 
+
+## Formatting descriptive text
+
+- [Overview](https://developers.bankid.com/how-to-guides/formatting-text/overview): Introduction to guide for formatting text shown to user in the app. 
+
+- [Parameters](https://developers.bankid.com/how-to-guides/formatting-text/parameters): Different parameters used when formatting text shown to the user in the app. 
+
+- [Syntax, special characters and rendering](https://developers.bankid.com/how-to-guides/formatting-text/syntax-special-characters-and-rendering): BankID Developers - Formatting text Syntax, special characters and rendering
+
+## UI resources
+
+- [UI, mobile ](https://developers.bankid.com/ui-resources/ui-guide-mobile): See guiding principles for the UI when the user os browsing on a mobile device. 
+
+- [UI, desktop ](https://developers.bankid.com/ui-resources/ui-desktop): See guiding principles for UI when user is browsing on a computer. 
+
+- [User messages](https://developers.bankid.com/ui-resources/user-messages): Recommended user messages for different situations.. 
+
+- [Terminology ](https://developers.bankid.com/ui-resources/terminology): Overview of used terminology in Swedish and English. 
+
+## API References
+
+- [General rules](https://developers.bankid.com/api-references/general-rules): General rules and routines for our APIs. 
+
+- [Errors](https://developers.bankid.com/api-references/errors): Find error codes, reasons and recommended reactions. 
+
+## /auth & /sign
+
+- [Overview](https://developers.bankid.com/api-references/auth--sign/overview): Overview and information about the API for /auth and /sign. 
+
+## Digital ID-card
+
+- [Overview](https://developers.bankid.com/api-references/digital-id-card/overview): Overview and information about the Verification of digital ID card API.
+
+## Test portal
+
+- [Test information](https://developers.bankid.com/test-portal/test-information): Information about testing your implementation. 
+
+- [Configure test BankID](https://developers.bankid.com/test-portal/bankid-for-test): How to get and configure a BankID for test. 
+
+- [Beta testing for Android](https://developers.bankid.com/test-portal/beta-testing-for-android): How to join beta testing of the mobile app for Android. 
+
+- [Testing](https://developers.bankid.com/test-portal/testing): Test your BankID implementation here!
+
+## News
+
+- [Facial recognition available for extra control](https://developers.bankid.com/news/facial-recognition-available-for-extra-control): It's now possible to allow users to do an extra control using facial recognition. 
+
+- [Maintenance in the test environment](https://developers.bankid.com/news/plannedaintenance-for-test-environment): The test environment will undergo maintenance January 8 at CET 21:00-Midnight.
+
+- [Payment updates](https://developers.bankid.com/news/payment-updates): The Payment endpoint is expanded and new payment endpoints are added. Read more! 
+
+- [Update the BankID program for Windows before May 15](https://developers.bankid.com/news/update-the-bankid-program-for-windows-before-may-15): All users must update to the latest version before May 15. 
+
+- [Mobile BankID system requirements raised](https://developers.bankid.com/news/mobile-bankid-system-requirements-raised)
+
+- [Updated website structure](https://developers.bankid.com/news/updated-website-structure): To make content easier to find, the structure on our developers' website has been changed. Read more.
+
+- [RP-API 5.0 and 5.1 discontinued](https://developers.bankid.com/news/rp-api-50-and-51-discontinued): In line with earlier communication, both version 5.0 and 5.1 have now been discontined. Use version 6.0 to keep accessing the service. 
+
+- [Discontinuation of API version 5.1 and system requirements changes for Mobile BankID](https://developers.bankid.com/news/api-version-to-be-discontinued-and-upcoming-change-to-system-requirements-for-mobile-bankid): API version 5.1 will be discontinued September 30th and changing system requirements for Mobile BankID.
+
+- [RP-API version 5.0 is now discontinued](https://developers.bankid.com/news/rp-api-version-5-discontinued): Version 5.0 of our RP-API is now discontinued. 
+
+- [Older API versions to be closed end of summer ](https://developers.bankid.com/news/older-api-versions-to-be-closed-end-of-summer): Versions 5.0 and 5.1 will be closed end of August and end of September. 
+
+- [Extra control now available for BankID in phone calls ](https://developers.bankid.com/news/extra-control-now-available-for-bankid-in-phone-calls)
+
+- [Demobank moving to this website](https://developers.bankid.com/news/demobank-moving-to-developers-website): The Demobank is moving to developers website. Read more. 
+
+- [Support for static QR has ended](https://developers.bankid.com/news/support-for-static-qr-has-ended): Support for static QR codes with version 6 of our RP-API has now ended. Read more!
+
+- [Developers website to include more](https://developers.bankid.com/news/developers-website-to-include-more-going-forwar): Over time other content, applications and materials for developers will move into this site. 
+
+- [Coming legal requirements will affect your implementation ](https://developers.bankid.com/news/coming-legal-requirements-will-affect-your-implementation): In the end of June 2025, new legal requirements will enter into force for digital accessibility of products and services in the private sector.
+
+- [Coming changes](https://developers.bankid.com/news/coming-changes)
+
+- [Endpoint overview added](https://developers.bankid.com/news/endpoint-overview-added): See all endpoints and descriptions for them on the API overview page. 
+
+- [New version of Keygen available](https://developers.bankid.com/news/new-version-of-keygen)
+
+- [Added information about Return URL](https://developers.bankid.com/news/added-information-about-return-url): Learn more about the usage of return URL in your organization's BankID integration. 
+
+- [System requirement change March 3rd 2025](https://developers.bankid.com/news/system-requirement-change-march-2025): In March 2025 the system requirements for Mobile BankID will be raised.
+
+- [Static QR code to be removed April 30th, 2025](https://developers.bankid.com/news/static-qr-code-to-be-removed-april-30th-2025): The possibility of using static QR code together with version 6 of our RP-API will therefore be removed at the end of April 2025.
+
+- [New endpoint /payment](https://developers.bankid.com/news/new-endpoint-payment): There is a new endpoint called /payment. Read more. 
+
+- [iOS system requirement change](https://developers.bankid.com/news/ios-system-requirement-change)
+
+- [New website for developers](https://developers.bankid.com/news/new-website-for-developers): This is our new website for developers who integrate BankID into e-services of companies, public authorities and other organisations. 

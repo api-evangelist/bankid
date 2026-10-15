@@ -1,0 +1,362 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/bankid/main/json-schema/bankid-payment-bulk-request-schema.json",
+  "title": "paymentBulk_request",
+  "x-generated": "2026-10-15",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/_original/bankid-openapi-openapi.yml#/components/schemas/paymentBulk_request",
+  "properties": {
+    "app": {
+      "$ref": "#/$defs/app"
+    },
+    "endUserIp": {
+      "description": "The user IP address as it is seen by your service.\n\nIPv4 and IPv6 are allowed.\n\nMake sure that the IP address you include as `endUserIp` is the address of your end user's device, not the internal\naddress of any reverse proxy between you and the end user.\n\nIn use cases where the IP address is not available, e. g. for voice-based services, the internal representation of\nthose systems' IP address is ok to use.",
+      "type": "string"
+    },
+    "returnRisk": {
+      "description": "If this is set to `true` a risk indicator will be included in the collect response when the order completes.\nThe risk indication requires that the endUserIp is correct.",
+      "type": "boolean"
+    },
+    "returnUrl": {
+      "description": "Orders started on the same device as where the user's BankID is stored (started with autostart token) will call\nthis URL when the order is completed.\n\nAny return URL provided in the start URL when the BankID app was launched will be ignored. If the user has a\nversion of the BankID app that does not support getting the `returnUrl` from the server, the order will be\ncancelled and the user will be asked to update their app.\n\nThe return URL you provide should include a nonce to the session. When the user returns to your app or web page,\nyour service should verify that the order was completed successfully and that the device receiving the\n`returnUrl` is the same device that started the order.\n\nUsing this parameter will make your service more secure and strengthen the channel binding between you and the\nuser.\n\nEnsure that the cookie or user IP address has not changed from the starting page to the `returnUrl` page.",
+      "maxLength": 512,
+      "minLength": 1,
+      "type": "string"
+    },
+    "userNonVisibleData": {
+      "description": "Data that you wish to include but not display to the user.\n\nThe value must be base 64-encoded.",
+      "maxLength": 1000,
+      "minLength": 1,
+      "type": "string"
+    },
+    "userVisibleData": {
+      "description": "Text displayed to the user during the order.\n\nThe purpose is to provide context, thereby enabling the user to detect identification errors and avert fraud\nattempts.\n\nThe text can be formatted using CR, LF and CRLF for new lines. The text must be encoded as UTF-8 and then base 64\nencoded.",
+      "maxLength": 1000,
+      "minLength": 1,
+      "type": "string"
+    },
+    "userVisibleTransactionBulk": {
+      "$ref": "#/$defs/UserVisibleTransactionBulk"
+    },
+    "web": {
+      "$ref": "#/$defs/web"
+    },
+    "requirement": {
+      "$ref": "#/$defs/payment_request_requirement"
+    }
+  },
+  "required": [
+    "endUserIp",
+    "userVisibleTransactionBulk"
+  ],
+  "type": "object",
+  "$defs": {
+    "Money": {
+      "description": "Object that sets monetary amount for the payment.<br>If the transactionType is npa this isn't allowed to be set.",
+      "properties": {
+        "amount": {
+          "description": "The monetary amount of the payment.\n\nThe string can contain one decimal separator which must be `\",\"`. The rest of the input must be numbers.\n\nExamples: `\"1000,00\"`, `\"100,000\"`, `\"100\"`, `\"0\"`",
+          "maxLength": 48,
+          "minLength": 1,
+          "type": "string"
+        },
+        "currency": {
+          "description": "The currency of the payment.\n\nThis must be an ISO 4217 alphabetic currency code.",
+          "maxLength": 3,
+          "minLength": 3,
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "title": "money",
+      "type": "object"
+    },
+    "RecipientCommon": {
+      "properties": {
+        "nameB64": {
+          "description": "The name of the recipient of the payment.\n\nFor the transaction type `\"card\"`, this is the merchant name.\n\nShould be a base64 encoded utf-8 string with a maximum length of 40 unicode code points.",
+          "maxLength": 215,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RecipientGenericBulk": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/RecipientCommon"
+        },
+        {
+          "properties": {
+            "accountNumber": {
+              "description": "The account number of the recipient of the payment.",
+              "maxLength": 42,
+              "minLength": 1,
+              "pattern": "^[A-Z0-9.,() -]+$",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ],
+      "description": "Displayed name and account number for the recipient of the payment.",
+      "required": [
+        "accountNumber"
+      ]
+    },
+    "TransactionBulk": {
+      "properties": {
+        "transactionType": {
+          "description": "The type of transaction.\n\nThe possible values have the following meaning:\n\n- `bankgiro`: Bankgiro payment.\n- `plusgiro`: Plusgiro payment.\n- `samebank`: Same bank transfer.\n- `domesticbank`: Domestic bank transfer.\n- `foreignbank`: Foreign bank transfer.",
+          "enum": [
+            "bankgiro",
+            "plusgiro",
+            "samebank",
+            "domesticbank",
+            "foreignbank"
+          ],
+          "type": "string"
+        },
+        "date": {
+          "description": "The date for the payment to occur.\n\nShould be a formatted as YYYY-MM-DD.",
+          "format": "date",
+          "type": "string"
+        },
+        "riskWarning": {
+          "$ref": "#/$defs/riskWarning"
+        }
+      },
+      "required": [
+        "date",
+        "money",
+        "transactionType"
+      ],
+      "type": "object"
+    },
+    "UserVisibleTransactionBulk": {
+      "description": "Information about the bulk transaction being approved.",
+      "properties": {
+        "payments": {
+          "description": "List of payments to approve.",
+          "items": {
+            "$ref": "#/$defs/UserVisibleTransactionBulk_payments_inner"
+          },
+          "maxItems": 40,
+          "minItems": 1,
+          "type": "array"
+        },
+        "sums": {
+          "description": "List of payment sums to approve.",
+          "items": {
+            "$ref": "#/$defs/Money"
+          },
+          "maxItems": 4,
+          "minItems": 1,
+          "type": "array"
+        },
+        "thirdPartyInitiatorB64": {
+          "description": "The third party initiating the payment.\n\nShould be a base64 encoded utf-8 string with a maximum length of 40 unicode code points.",
+          "maxLength": 270,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "payments",
+        "sums"
+      ],
+      "type": "object"
+    },
+    "UserVisibleTransactionBulk_payments_inner": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/TransactionBulk"
+        },
+        {
+          "properties": {
+            "money": {
+              "$ref": "#/$defs/Money"
+            },
+            "recipient": {
+              "$ref": "#/$defs/RecipientGenericBulk"
+            },
+            "fromAccount": {
+              "$ref": "#/$defs/UserVisibleTransactionBulk_payments_inner_allOf_fromAccount"
+            },
+            "riskFlags": {
+              "$ref": "#/$defs/riskFlags"
+            }
+          }
+        }
+      ],
+      "required": [
+        "recipient"
+      ]
+    },
+    "UserVisibleTransactionBulk_payments_inner_allOf_fromAccount": {
+      "description": "The account the payment is taken from.\n\nItems adjacent to each other in `payments` will be grouped together if share the same `fromAccount` values.  \n\nEither `nameB64` or `accountNumber` is required.",
+      "properties": {
+        "nameB64": {
+          "description": "The name of the account.\n\nShould be a base64 encoded utf-8 string with a maximum length of 40 unicode code points.",
+          "maxLength": 215,
+          "minLength": 1,
+          "type": "string"
+        },
+        "accountNumber": {
+          "description": "The account number the transfer is sourced from.",
+          "format": "string",
+          "maxLength": 42,
+          "minLength": 1,
+          "pattern": "^[A-Z0-9.,() -]+$",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "app": {
+      "description": "Additional data included when creating an order from your app.\n\nWhen starting an order from your app client this data may be included in the request.\n\nYou can send the parameter `web` or `app`, not both. If providing this parameter, at least one of its members must\nbe specified.",
+      "properties": {
+        "appIdentifier": {
+          "description": "The identifier of your application.\n\nThis is the package name on Android and the bundle identifier on iOS.\n\nIt is vital to use the correct value. If your service does not supply the correct value legitimate orders might\nbe blocked.",
+          "maxLength": 256,
+          "minLength": 2,
+          "type": "string"
+        },
+        "deviceOS": {
+          "description": "The device operating system where your app is running.",
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "deviceIdentifier": {
+          "description": "The identifier of the device your client is running on.\n\nThis is used to uniquely identify the device and should be a value that is not tied to a single user of the\ndevice. Preferably, it should remain the same even if your app is reinstalled.",
+          "maxLength": 64,
+          "minLength": 1,
+          "type": "string"
+        },
+        "deviceModelName": {
+          "description": "The model of the device your app is running on.",
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "cardReader": {
+      "description": "Whether the user needs to complete the order using a card reader for the signature.\n\nThe possible values have the following meaning:\n\n  *  `class1`: The order must be confirmed with a card reader where the PIN code is entered on a computer keyboard,\n     or a card reader of higher class.\n  *  `class2`: The order must be confirmed with a card reader where the PIN code is entered on the reader.\n\nThis condition should always be combined with a `certificatePolicies` for a smart card to avoid undefined\nbehaviour.\n\nNo card reader is required by default.",
+      "enum": [
+        "class1",
+        "class2"
+      ],
+      "type": "string"
+    },
+    "payment_request_requirement": {
+      "description": "Requirements on how the payment order must be performed.",
+      "properties": {
+        "cardReader": {
+          "$ref": "#/$defs/cardReader"
+        },
+        "certificatePolicies": {
+          "description": "The OID in certificate policies in the user certificate.\n\nOne wildcard is allowed from position 5 and forward (`\"1.2.752.78.*\"`).\n\nAvailable values for production BankIDs are:\n*  `\"1.2.752.78.1.1\"` - BankID on file\n*  `\"1.2.752.78.1.2\"` - BankID on card\n*  `\"1.2.752.78.1.5\"` - Mobile BankID\n\nAvailable values for test BankIDs are:\n*  `\"1.2.3.4.5\"` - BankID on file\n*  `\"1.2.3.4.10\"` - BankID on card\n*  `\"1.2.3.4.25\"` - Mobile BankID\n*  `\"1.2.752.60.1.6\"` - Test BankID for some BankID banks\n\nWhen using one of the _BankID on card_ policies, the `cardReader` requirement can be used to further restrict the\ntype of card reader allowed. If no `cardReader` requirement is passed, all supported kinds of card readers are\npermitted.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "pinCode": {
+          "description": "Users are required to confirm the order with their security code even if they have biometrics activated.",
+          "type": "boolean"
+        },
+        "mrtd": {
+          "description": "Whether the user needs to confirm their identity with a valid Swedish passport or national ID card to complete the\norder.\n\nNo identity confirmation is required by default.",
+          "type": "boolean"
+        },
+        "personalNumber": {
+          "description": "The personal identity number allowed to confirm the identification.\n\nIf a BankID with another personal identity number attempts to confirm the identification, it will fail.",
+          "maxLength": 12,
+          "minLength": 12,
+          "pattern": "^[0-9]*$",
+          "type": "string"
+        },
+        "stepUp": {
+          "description": "Whether the user needs to perform a step up.\n\nThe possible values have the following meaning:\n- `mrtd`: Confirm identity with a valid Swedish passport or national ID card to complete the order.\n- `face`: Confirm identity with facial recognition.\n\nUse multiple values to let the user choose between the available identity confirmations.\n\nThe `requirement.stepUp` property can not be used in combination with the property `requirement.mrtd`.\n\nRequesting identity confirmation with facial recognition as the only option is not supported.\n\nNo identity confirmation is required by default.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "riskFlags": {
+      "description": "Indicate to the risk assessment system that the payment has a higher risk or is unusual for the user.\nThe riskFlags will not be displayed to the end user.",
+      "items": {
+        "enum": [
+          "newCard",
+          "newCustomer",
+          "newRecipient",
+          "highRiskRecipient",
+          "largeAmount",
+          "foreignCurrency",
+          "cryptoCurrencyPurchase",
+          "moneyTransfer",
+          "overseasTransaction",
+          "recurringPayment",
+          "suspiciousPaymentPattern",
+          "partialNameMatch",
+          "noNameMatch",
+          "other"
+        ],
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "riskWarning": {
+      "description": "Indicate to the user that the payment has higher risk or is unusual for the user.\nThis will be indicated in the UI.\n\n<table>\n  <thead>\n    <tr>\n      <td>riskWarning</td>\n      <td>text displayed to user</td>\n    </tr>\n  </thead>\n  <tr>\n    <td>newRecipient</td>\n    <td>New recipient</td>\n  </tr>\n  <tr>\n    <td>largeAmount</td>\n    <td>Large amount</td>\n  </tr>\n  <tr>\n    <td>foreignCurrency</td>\n    <td>Foreign currency</td>\n  </tr>\n  <tr>\n    <td>cryptoCurrencyPurchase</td>\n    <td>Purchase of crypto currency</td>\n  </tr>\n  <tr>\n    <td>moneyTransfer</td>\n    <td>Money transfer</td>\n  </tr>\n  <tr>\n    <td>overseasTransaction</td>\n    <td>International payment</td>\n  </tr>\n  <tr>\n    <td>recurringPayment</td>\n    <td>Recurring payment</td>\n  </tr>\n  <tr>\n    <td>partialNameMatch</td>\n    <td>IBAN and name don’t fully match</td>\n  </tr>\n  <tr>\n    <td>noNameMatch</td>\n    <td>IBAN and name don’t match</td>\n  </tr>\n  <tr>\n    <td>other</td>\n    <td>Please verify the details above</td>\n  </tr>\n</table>",
+      "enum": [
+        "newRecipient",
+        "largeAmount",
+        "foreignCurrency",
+        "cryptoCurrencyPurchase",
+        "moneyTransfer",
+        "overseasTransaction",
+        "recurringPayment",
+        "partialNameMatch",
+        "noNameMatch",
+        "other"
+      ],
+      "type": "string"
+    },
+    "web": {
+      "description": "Additional data included when creating an order from your web page.\n\nWhen starting an order from your web page this data may be included in the request.\n\nYou can send the parameter `web` or `app`, not both. If providing this parameter, at least one of its members must\nbe specified.",
+      "properties": {
+        "deviceIdentifier": {
+          "description": "The identifier of the device running your client.\n\nDo not use a session cookie. Use a separate cookie or the hash of one.\n\nThis value should be unique to the user's browser and persist across sessions.",
+          "maxLength": 64,
+          "minLength": 1,
+          "type": "string"
+        },
+        "referringDomain": {
+          "description": "The domain that starts the BankID app.\n\nThis should generally be your domain name followed by the public suffix, which will generally be the top level\ndomain.\n\nOnly the digits 0 to 9, the letters a to z, dot (\".\") and dash (\"-\") are allowed. When using an International\nDomain Name, the string must be punycode encoded.",
+          "maxLength": 253,
+          "minLength": 3,
+          "pattern": "[0-9a-z-.]*",
+          "type": "string"
+        },
+        "userAgent": {
+          "description": "The user agent of the user interacting with your web page.",
+          "maxLength": 512,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

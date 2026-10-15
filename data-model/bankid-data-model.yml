@@ -1,0 +1,357 @@
+generated: '2026-10-15'
+method: derived
+generator: derive-data-model.py
+source:
+- openapi/_original/bankid-openapi-openapi.yml
+notation: has_one = property $ref; has_many = array of $ref; belongs_to = <entity>_id field
+summary:
+  entities: 57
+  entities_in_spec: 57
+  relationships: 51
+entities:
+- name: Bankgiro
+  fields: 0
+- name: Card
+  fields: 0
+- name: CardTypeCardNpa
+  fields: 0
+- name: Direct
+  fields: 0
+- name: DomesticBank
+  fields: 0
+- name: ForeignBank
+  fields: 0
+- name: Money
+  fields: 2
+  description: Object that sets monetary amount for the payment.<br>If the transactionType is npa this isn't allowed
+    to be set.
+- name: Npa
+  fields: 0
+- name: NpaTypeCardNpa
+  fields: 0
+- name: Plusgiro
+  fields: 0
+- name: RecipientBankgiro
+  fields: 0
+  description: Displayed name and account number for the recipient of the payment.
+- name: RecipientCard
+  fields: 0
+  description: Displayed name for the recipient of the payment.
+- name: RecipientCommon
+  fields: 1
+- name: RecipientDirect
+  fields: 0
+- name: RecipientDomesticBank
+  fields: 0
+  description: Displayed name and account number for the recipient of the payment.
+- name: RecipientForeignBank
+  fields: 0
+  description: Displayed name and account number for the recipient of the payment.
+- name: RecipientGenericBulk
+  fields: 0
+  description: Displayed name and account number for the recipient of the payment.
+- name: RecipientNpa
+  fields: 0
+  description: Displayed name for the recipient of the payment.
+- name: RecipientPlusgiro
+  fields: 0
+  description: Displayed name and account number for the recipient of the payment.
+- name: RecipientSameBank
+  fields: 0
+  description: Displayed name and account number for the recipient of the payment.
+- name: SameBank
+  fields: 0
+- name: TransactionBulk
+  fields: 3
+- name: UserVisibleTransaction
+  fields: 0
+  description: Information about the transaction being approved.
+- name: UserVisibleTransactionBulk
+  fields: 3
+  description: Information about the bulk transaction being approved.
+- name: UserVisibleTransactionBulk_payments_inner
+  fields: 0
+- name: UserVisibleTransactionBulk_payments_inner_allOf_fromAccount
+  fields: 2
+  description: The account the payment is taken from.
+- name: UserVisibleTransactionCardNpa
+  fields: 0
+  description: Information about the transaction being approved.
+- name: UserVisibleTransactionCardNpaParentType
+  fields: 5
+- name: UserVisibleTransactionParentType
+  fields: 5
+- name: app
+  fields: 4
+  description: Additional data included when creating an order from your app.
+- name: auth_request
+  fields: 9
+- name: auth_request_requirement
+  fields: 6
+  description: Requirements on how the authentication order must be performed.
+- name: collect_request
+  fields: 1
+- name: collect_response
+  fields: 4
+- name: collect_response_completionData
+  fields: 7
+  description: Information about the user and the completed order.
+- name: collect_response_completionData_device
+  fields: 2
+  description: Information related to the device.
+- name: collect_response_completionData_stepUp
+  fields: 2
+  description: Information about additional verifications that were part of the order.
+- name: collect_response_completionData_user
+  fields: 4
+  description: Information related to the user.
+- name: empty_response
+  fields: 0
+- name: error_response
+  fields: 2
+  description: Generic error response
+- name: limited_response
+  fields: 1
+- name: order_response
+  fields: 4
+- name: otherPayment_request
+  fields: 11
+- name: otherPayment_request_requirement
+  fields: 5
+  description: Requirements on how the payment order must be performed.
+- name: paymentBulk_request
+  fields: 9
+- name: payment_request
+  fields: 11
+- name: payment_request_requirement
+  fields: 6
+  description: Requirements on how the payment order must be performed.
+- name: phoneAuth_request
+  fields: 6
+- name: phoneAuth_request_requirement
+  fields: 5
+  description: Requirements on how the authentication order must be performed.
+- name: phonePaymentBulk_request
+  fields: 6
+- name: phonePayment_request
+  fields: 8
+- name: phoneSign_request
+  fields: 6
+- name: phoneSign_request_requirement
+  fields: 5
+  description: Requirements on how the signature order must be performed.
+- name: phone_auth_sign_response
+  fields: 1
+- name: sign_request
+  fields: 9
+- name: sign_request_requirement
+  fields: 6
+  description: Requirements on how the signature order must be performed.
+- name: web
+  fields: 3
+  description: Additional data included when creating an order from your web page.
+relationships:
+- from: collect_response
+  to: collect_response_completionData
+  type: has_one
+  via: completionData
+- from: UserVisibleTransactionBulk
+  to: UserVisibleTransactionBulk_payments_inner
+  type: has_many
+  via: payments
+- from: UserVisibleTransactionBulk
+  to: Money
+  type: has_many
+  via: sums
+- from: Card
+  to: Money
+  type: has_one
+  via: money
+- from: Card
+  to: RecipientCard
+  type: has_one
+  via: recipient
+- from: Npa
+  to: RecipientNpa
+  type: has_one
+  via: recipient
+- from: Bankgiro
+  to: Money
+  type: has_one
+  via: money
+- from: Bankgiro
+  to: RecipientBankgiro
+  type: has_one
+  via: recipient
+- from: Plusgiro
+  to: Money
+  type: has_one
+  via: money
+- from: Plusgiro
+  to: RecipientPlusgiro
+  type: has_one
+  via: recipient
+- from: SameBank
+  to: Money
+  type: has_one
+  via: money
+- from: SameBank
+  to: RecipientSameBank
+  type: has_one
+  via: recipient
+- from: DomesticBank
+  to: Money
+  type: has_one
+  via: money
+- from: DomesticBank
+  to: RecipientDomesticBank
+  type: has_one
+  via: recipient
+- from: ForeignBank
+  to: Money
+  type: has_one
+  via: money
+- from: ForeignBank
+  to: RecipientForeignBank
+  type: has_one
+  via: recipient
+- from: Direct
+  to: Money
+  type: has_one
+  via: money
+- from: Direct
+  to: RecipientDirect
+  type: has_one
+  via: recipient
+- from: CardTypeCardNpa
+  to: Money
+  type: has_one
+  via: money
+- from: CardTypeCardNpa
+  to: RecipientCard
+  type: has_one
+  via: recipient
+- from: NpaTypeCardNpa
+  to: RecipientNpa
+  type: has_one
+  via: recipient
+- from: auth_request
+  to: app
+  type: has_one
+  via: app
+- from: auth_request
+  to: web
+  type: has_one
+  via: web
+- from: auth_request
+  to: auth_request_requirement
+  type: has_one
+  via: requirement
+- from: sign_request
+  to: app
+  type: has_one
+  via: app
+- from: sign_request
+  to: web
+  type: has_one
+  via: web
+- from: sign_request
+  to: sign_request_requirement
+  type: has_one
+  via: requirement
+- from: payment_request
+  to: app
+  type: has_one
+  via: app
+- from: payment_request
+  to: UserVisibleTransaction
+  type: has_one
+  via: userVisibleTransaction
+- from: payment_request
+  to: web
+  type: has_one
+  via: web
+- from: payment_request
+  to: payment_request_requirement
+  type: has_one
+  via: requirement
+- from: paymentBulk_request
+  to: app
+  type: has_one
+  via: app
+- from: paymentBulk_request
+  to: UserVisibleTransactionBulk
+  type: has_one
+  via: userVisibleTransactionBulk
+- from: paymentBulk_request
+  to: web
+  type: has_one
+  via: web
+- from: paymentBulk_request
+  to: payment_request_requirement
+  type: has_one
+  via: requirement
+- from: phoneAuth_request
+  to: phoneAuth_request_requirement
+  type: has_one
+  via: requirement
+- from: phoneSign_request
+  to: phoneSign_request_requirement
+  type: has_one
+  via: requirement
+- from: phonePayment_request
+  to: UserVisibleTransaction
+  type: has_one
+  via: userVisibleTransaction
+- from: phonePayment_request
+  to: phoneSign_request_requirement
+  type: has_one
+  via: requirement
+- from: phonePaymentBulk_request
+  to: UserVisibleTransactionBulk
+  type: has_one
+  via: userVisibleTransactionBulk
+- from: phonePaymentBulk_request
+  to: phoneSign_request_requirement
+  type: has_one
+  via: requirement
+- from: otherPayment_request
+  to: app
+  type: has_one
+  via: app
+- from: otherPayment_request
+  to: UserVisibleTransactionCardNpa
+  type: has_one
+  via: userVisibleTransaction
+- from: otherPayment_request
+  to: web
+  type: has_one
+  via: web
+- from: otherPayment_request
+  to: otherPayment_request_requirement
+  type: has_one
+  via: requirement
+- from: collect_response_completionData
+  to: collect_response_completionData_user
+  type: has_one
+  via: user
+- from: collect_response_completionData
+  to: collect_response_completionData_device
+  type: has_one
+  via: device
+- from: collect_response_completionData
+  to: collect_response_completionData_stepUp
+  type: has_one
+  via: stepUp
+- from: UserVisibleTransactionBulk_payments_inner
+  to: Money
+  type: has_one
+  via: money
+- from: UserVisibleTransactionBulk_payments_inner
+  to: RecipientGenericBulk
+  type: has_one
+  via: recipient
+- from: UserVisibleTransactionBulk_payments_inner
+  to: UserVisibleTransactionBulk_payments_inner_allOf_fromAccount
+  type: has_one
+  via: fromAccount

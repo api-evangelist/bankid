@@ -1,0 +1,12 @@
+Contact: mailto:responsible-disclosure@bankid.com
+Encryption: https://www.bankid.com/.well-known/pubkey.asc
+Policy: https://www.bankid.com/en/disclosure
+Preferred-Languages: en
+Expires: 2027-10-14T00:00:00.000Z
+Canonical: https://www.bankid.com/.well-known/security.txt
+Canonical: https://support.bankid.com/.well-known/security.txt
+Canonical: https://developers.bankid.com/.well-known/security.txt
+Canonical: https://test.bankid.com/.well-known/security.txt
+Canonical: https://install.bankid.com/.well-known/security.txt
+Canonical: https://app.bankid.com/.well-known/security.txt
+Canonical: https://m.bankid.com/.well-known/security.txt

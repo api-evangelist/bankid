@@ -1,23 +1,130 @@
 aid: bankid
 name: BankID
-description: 'BankID is a company surfaced via the API Evangelist harvest backlog (source: stockholm-trip)
-  and added to the network as a stub for full-pipeline profiling.'
+image: https://www.bankid.com/assets/stock/press-material/bankid_start02-lo.jpg
+description: BankID provides a digital identification and signing solution used widely across Sweden for secure online authentication and electronic
+  signatures. It enables banks, government services, and private enterprises to verify user identities and authorize transactions through a mobile
+  app and web integrations, supporting strong customer authentication and compliance with eIDAS standards. The platform offers APIs for developers
+  to integrate BankID verification, signing, and user flow management into their applications, facilitating seamless and secure digital interactions.
 url: https://raw.githubusercontent.com/api-evangelist/bankid/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:stockholm-trip
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profiled
+x-tier-reason: enrichment pass 2026-10-15 (modular-v1; was harvest)
 specificationVersion: '0.20'
 created: '2026-10-15'
 modified: '2026-10-15'
 tags:
 - Company
-apis: []
+- Authentication
+- eIDAS
+- DigitalIdentity
+- Sweden
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Spectral
+  url: rules/bankid-rules.yml
+- type: JSONLD
+  url: json-ld/bankid-context.jsonld
+- type: Vocabulary
+  url: vocabulary/bankid-vocabulary.yml
+- type: Conformance
+  url: conformance/bankid-conformance.yml
+- type: DataModel
+  url: data-model/bankid-data-model.yml
+- type: ErrorCatalog
+  url: errors/bankid-problem-types.yml
+- type: LLMsTxt
+  url: llms/bankid-llms.txt
+- type: SecurityTxt
+  url: well-known/bankid-support-security.txt
+- type: SecurityTxt
+  url: well-known/bankid-status-security.txt
+- type: SecurityTxt
+  url: well-known/bankid-security.txt
+- type: SecurityTxt
+  url: well-known/bankid-developers-security.txt
+- type: SecurityTxt
+  url: well-known/bankid-app-security.txt
+- type: WellKnown
+  url: well-known/bankid-well-known.yml
+- type: Hosts
+  url: hosts/bankid-hosts.yml
+- type: Vendors
+  url: vendors/bankid-vendors.yml
+- type: SDKs
+  url: packages/bankid-packages.yml
+- type: Packages
+  url: packages/bankid-packages.yml
+- type: StatusPage
+  url: https://status.bankid.com/
+- type: DeveloperPortal
+  url: https://developers.bankid.com/
+- type: GettingStarted
+  url: https://developers.bankid.com/getting-started/introduction
+- type: APIReference
+  url: https://developers.bankid.com/llms.txt
+- type: GitHubOrganization
+  url: https://github.com/BankID
+- type: DomainSecurity
+  url: security/bankid-domain-security.yml
 - type: Website
-  url: https://bankid.com/
+  url: https://www.bankid.com/
+- type: Documentation
+  url: https://www.bankid.com/om-oss
+- type: PrivacyPolicy
+  url: https://www.bankid.com/juridik/integritetspolicy-bankid
+- type: TermsOfService
+  url: https://www.bankid.com/juridik/integritetspolicy-finansiell-id-teknik
+apis:
+- name: Relying Party API
+  description: BankID Relying Party API for authentication and signing
+  humanURL: https://developers.bankid.com/api-references/auth--sign/overview
+  baseURL: https://appapi2.bankid.com/rp/v6.0
+  aid: bankid:relying-party-api
+- name: ID Card Verification API
+  description: Verify ID card from BankID
+  humanURL: https://developers.bankid.com/api-references/id-card/overview
+  baseURL: https://idcardapi.bankid.com/rp/v1
+  aid: bankid:id-card-verification-api
+- aid: bankid:relying-party-api-openapi-api
+  name: Relying Party API Openapi API
+  description: BankID Relying Party API v6.0
+  humanURL: https://developers.bankid.com/llms.txt
+  baseURL: https://appapi2.test.bankid.com/rp/v6.0
+  properties:
+  - type: OpenAPI
+    url: openapi/_original/bankid-openapi-openapi.yml
+  - type: JSONSchema
+    url: json-schema/bankid-collect-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-payment-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-other-payment-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-payment-bulk-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-sign-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-auth-request-schema.json
+x-coverage:
+  state: none
+  reason: no-developer-program
+  method: derived
+  generated: '2026-10-15'
+  generator: derive-coverage.py (pre-flight evidence)
+  detail: the company publishes no developer documentation host and no machine-readable contract on its own domain
+  evidence:
+  - url: https://status.bankid.com/mcp
+    status: 403
+  - url: https://bankid.com/
+    status: 200
+x-enrichment:
+  date: '2026-10-15'
+  status: enriched
+  artifacts_added: 16
+  pass: modular-v1
+  engine: identity=local,contract=local,surfaces=local,docs=local,regulatory=local

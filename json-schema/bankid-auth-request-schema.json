@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/bankid/main/json-schema/bankid-auth-request-schema.json",
+  "title": "auth_request",
+  "x-generated": "2026-10-15",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/_original/bankid-openapi-openapi.yml#/components/schemas/auth_request",
+  "properties": {
+    "app": {
+      "$ref": "#/$defs/app"
+    },
+    "endUserIp": {
+      "description": "The user IP address as it is seen by your service.\n\nIPv4 and IPv6 are allowed.\n\nMake sure that the IP address you include as `endUserIp` is the address of your end user's device, not the internal\naddress of any reverse proxy between you and the end user.\n\nIn use cases where the IP address is not available, e. g. for voice-based services, the internal representation of\nthose systems' IP address is ok to use.",
+      "type": "string"
+    },
+    "returnRisk": {
+      "description": "If this is set to `true` a risk indicator will be included in the collect response when the order completes.\nThe risk indication requires that the endUserIp is correct.",
+      "type": "boolean"
+    },
+    "returnUrl": {
+      "description": "Orders started on the same device as where the user's BankID is stored (started with autostart token) will call\nthis URL when the order is completed.\n\nAny return URL provided in the start URL when the BankID app was launched will be ignored. If the user has a\nversion of the BankID app that does not support getting the `returnUrl` from the server, the order will be\ncancelled and the user will be asked to update their app.\n\nThe return URL you provide should include a nonce to the session. When the user returns to your app or web page,\nyour service should verify that the order was completed successfully and that the device receiving the\n`returnUrl` is the same device that started the order.\n\nUsing this parameter will make your service more secure and strengthen the channel binding between you and the\nuser.\n\nEnsure that the cookie or user IP address has not changed from the starting page to the `returnUrl` page.",
+      "maxLength": 512,
+      "minLength": 1,
+      "type": "string"
+    },
+    "userNonVisibleData": {
+      "description": "Data that you wish to include but not display to the user.\n\nThe value must be base 64-encoded.",
+      "maxLength": 1500,
+      "minLength": 1,
+      "type": "string"
+    },
+    "userVisibleData": {
+      "description": "Text displayed to the user during the order.\n\nThe purpose is to provide context, thereby enabling the user to detect identification errors and avert fraud\nattempts.\n\nThe text can be formatted using CR, LF and CRLF for new lines. The text must be encoded as UTF-8 and then base 64\nencoded.",
+      "maxLength": 1500,
+      "minLength": 1,
+      "type": "string"
+    },
+    "userVisibleDataFormat": {
+      "$ref": "#/$defs/userVisibleDataFormat"
+    },
+    "web": {
+      "$ref": "#/$defs/web"
+    },
+    "requirement": {
+      "$ref": "#/$defs/auth_request_requirement"
+    }
+  },
+  "required": [
+    "endUserIp"
+  ],
+  "type": "object",
+  "$defs": {
+    "app": {
+      "description": "Additional data included when creating an order from your app.\n\nWhen starting an order from your app client this data may be included in the request.\n\nYou can send the parameter `web` or `app`, not both. If providing this parameter, at least one of its members must\nbe specified.",
+      "properties": {
+        "appIdentifier": {
+          "description": "The identifier of your application.\n\nThis is the package name on Android and the bundle identifier on iOS.\n\nIt is vital to use the correct value. If your service does not supply the correct value legitimate orders might\nbe blocked.",
+          "maxLength": 256,
+          "minLength": 2,
+          "type": "string"
+        },
+        "deviceOS": {
+          "description": "The device operating system where your app is running.",
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "deviceIdentifier": {
+          "description": "The identifier of the device your client is running on.\n\nThis is used to uniquely identify the device and should be a value that is not tied to a single user of the\ndevice. Preferably, it should remain the same even if your app is reinstalled.",
+          "maxLength": 64,
+          "minLength": 1,
+          "type": "string"
+        },
+        "deviceModelName": {
+          "description": "The model of the device your app is running on.",
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "auth_request_requirement": {
+      "description": "Requirements on how the authentication order must be performed.",
+      "properties": {
+        "cardReader": {
+          "$ref": "#/$defs/cardReader"
+        },
+        "certificatePolicies": {
+          "description": "The OID in certificate policies in the user certificate.\n\nOne wildcard is allowed from position 5 and forward (`\"1.2.752.78.*\"`).\n\nAvailable values for production BankIDs are:\n*  `\"1.2.752.78.1.1\"` - BankID on file\n*  `\"1.2.752.78.1.2\"` - BankID on card\n*  `\"1.2.752.78.1.5\"` - Mobile BankID\n\nAvailable values for test BankIDs are:\n*  `\"1.2.3.4.5\"` - BankID on file\n*  `\"1.2.3.4.10\"` - BankID on card\n*  `\"1.2.3.4.25\"` - Mobile BankID\n*  `\"1.2.752.60.1.6\"` - Test BankID for some BankID banks\n\nWhen using one of the _BankID on card_ policies, the `cardReader` requirement can be used to further restrict the\ntype of card reader allowed. If no `cardReader` requirement is passed, all supported kinds of card readers are\npermitted.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "mrtd": {
+          "description": "Whether the user needs to confirm their identity with a valid Swedish passport or national ID card to complete the\norder.\n\nNo identity confirmation is required by default.",
+          "type": "boolean"
+        },
+        "personalNumber": {
+          "description": "The personal identity number allowed to confirm the identification.\n\nIf a BankID with another personal identity number attempts to confirm the identification, it will fail.",
+          "maxLength": 12,
+          "minLength": 12,
+          "pattern": "^[0-9]*$",
+          "type": "string"
+        },
+        "pinCode": {
+          "description": "Users are required to confirm the order with their security code even if they have biometrics activated.",
+          "type": "boolean"
+        },
+        "stepUp": {
+          "description": "Whether the user needs to perform a step up.\n\nThe possible values have the following meaning:\n- `mrtd`: Confirm identity with a valid Swedish passport or national ID card to complete the order.\n- `face`: Confirm identity with facial recognition.\n\nUse multiple values to let the user choose between the available identity confirmations.\n\nThe `requirement.stepUp` property can not be used in combination with the property `requirement.mrtd`.\n\nRequesting identity confirmation with facial recognition as the only option is not supported.\n\nNo identity confirmation is required by default.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "cardReader": {
+      "description": "Whether the user needs to complete the order using a card reader for the signature.\n\nThe possible values have the following meaning:\n\n  *  `class1`: The order must be confirmed with a card reader where the PIN code is entered on a computer keyboard,\n     or a card reader of higher class.\n  *  `class2`: The order must be confirmed with a card reader where the PIN code is entered on the reader.\n\nThis condition should always be combined with a `certificatePolicies` for a smart card to avoid undefined\nbehaviour.\n\nNo card reader is required by default.",
+      "enum": [
+        "class1",
+        "class2"
+      ],
+      "type": "string"
+    },
+    "userVisibleDataFormat": {
+      "description": "If present and set to `\"simpleMarkdownV1\"`, this parameter indicates that `userVisibleData` holds formatting\ncharacters.\n\nThe possible values have the following meaning:\n\n-  `plaintext`: `userVisibleData` contains base 64 encoded text using a sub-set of UTF-8 and CR, LF or CRLF for\n   line breaks..\n-  `simpleMarkdownV1`: `userVisibleData` contains Simple Markdown version 1.\n\nPlease see\n[the documentation](https://developers.bankid.com/getting-started/backend/formatting-text/syntax-special-characters-and-rendering)\nfor more information about the format.",
+      "enum": [
+        "plaintext",
+        "simpleMarkdownV1"
+      ],
+      "type": "string"
+    },
+    "web": {
+      "description": "Additional data included when creating an order from your web page.\n\nWhen starting an order from your web page this data may be included in the request.\n\nYou can send the parameter `web` or `app`, not both. If providing this parameter, at least one of its members must\nbe specified.",
+      "properties": {
+        "deviceIdentifier": {
+          "description": "The identifier of the device running your client.\n\nDo not use a session cookie. Use a separate cookie or the hash of one.\n\nThis value should be unique to the user's browser and persist across sessions.",
+          "maxLength": 64,
+          "minLength": 1,
+          "type": "string"
+        },
+        "referringDomain": {
+          "description": "The domain that starts the BankID app.\n\nThis should generally be your domain name followed by the public suffix, which will generally be the top level\ndomain.\n\nOnly the digits 0 to 9, the letters a to z, dot (\".\") and dash (\"-\") are allowed. When using an International\nDomain Name, the string must be punycode encoded.",
+          "maxLength": 253,
+          "minLength": 3,
+          "pattern": "[0-9a-z-.]*",
+          "type": "string"
+        },
+        "userAgent": {
+          "description": "The user agent of the user interacting with your web page.",
+          "maxLength": 512,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

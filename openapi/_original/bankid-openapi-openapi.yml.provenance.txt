@@ -1,0 +1,8 @@
+generated: '2026-10-15'
+method: probed
+generator: harvest-sibling-contracts.py --bootstrap
+source: https://developers.bankid.com/assets/openapi/openapi-auth-sign-6.1.11.yaml
+operations: 11
+version: 3.0.4
+ownership: the contract module fetched this URL and reported it saved with ownership
+  verified; its write was empty, so the closeout saved it

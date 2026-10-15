@@ -1,0 +1,258 @@
+{
+  "@context": {
+    "@vocab": "https://bankid.com/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "bankid": "https://bankid.com/schema#",
+    "order_response": "bankid:order_response",
+    "orderRef": {
+      "@id": "bankid:orderRef",
+      "@type": "xsd:string"
+    },
+    "autoStartToken": {
+      "@id": "bankid:autoStartToken",
+      "@type": "xsd:string"
+    },
+    "qrStartToken": {
+      "@id": "bankid:qrStartToken",
+      "@type": "xsd:string"
+    },
+    "qrStartSecret": {
+      "@id": "bankid:qrStartSecret",
+      "@type": "xsd:string"
+    },
+    "collect_response": "bankid:collect_response",
+    "status": {
+      "@id": "bankid:status",
+      "@type": "@id"
+    },
+    "completionData": {
+      "@id": "bankid:completionData",
+      "@type": "@id"
+    },
+    "hintCode": {
+      "@id": "bankid:hintCode",
+      "@type": "xsd:string"
+    },
+    "phone_auth_sign_response": "bankid:phone_auth_sign_response",
+    "error_response": "bankid:error_response",
+    "errorCode": {
+      "@id": "bankid:errorCode",
+      "@type": "xsd:string"
+    },
+    "details": {
+      "@id": "bankid:details",
+      "@type": "xsd:string"
+    },
+    "app": "bankid:app",
+    "appIdentifier": {
+      "@id": "bankid:appIdentifier",
+      "@type": "xsd:string"
+    },
+    "deviceOS": {
+      "@id": "bankid:deviceOS",
+      "@type": "xsd:string"
+    },
+    "deviceIdentifier": {
+      "@id": "bankid:deviceIdentifier",
+      "@type": "xsd:string"
+    },
+    "deviceModelName": {
+      "@id": "bankid:deviceModelName",
+      "@type": "xsd:string"
+    },
+    "userVisibleDataFormat": "bankid:userVisibleDataFormat",
+    "web": "bankid:web",
+    "referringDomain": {
+      "@id": "bankid:referringDomain",
+      "@type": "xsd:string"
+    },
+    "userAgent": {
+      "@id": "bankid:userAgent",
+      "@type": "xsd:string"
+    },
+    "cardReader": "bankid:cardReader",
+    "UserVisibleTransactionBulk": "bankid:UserVisibleTransactionBulk",
+    "payments": {
+      "@id": "bankid:payments",
+      "@container": "@list"
+    },
+    "sums": {
+      "@id": "bankid:sums",
+      "@container": "@list"
+    },
+    "thirdPartyInitiatorB64": {
+      "@id": "bankid:thirdPartyInitiatorB64",
+      "@type": "xsd:string"
+    },
+    "callInitiator": "bankid:callInitiator",
+    "limited_response": "bankid:limited_response",
+    "risk": "bankid:risk",
+    "TransactionBulk": "bankid:TransactionBulk",
+    "transactionType": {
+      "@id": "bankid:transactionType",
+      "@type": "xsd:string"
+    },
+    "date": {
+      "@id": "bankid:date",
+      "@type": "xsd:date"
+    },
+    "riskWarning": {
+      "@id": "bankid:riskWarning",
+      "@type": "@id"
+    },
+    "Money": "bankid:Money",
+    "amount": {
+      "@id": "bankid:amount",
+      "@type": "xsd:string"
+    },
+    "currency": {
+      "@id": "bankid:currency",
+      "@type": "xsd:string"
+    },
+    "UserVisibleTransactionParentType": "bankid:UserVisibleTransactionParentType",
+    "recurring": {
+      "@id": "bankid:recurring",
+      "@type": "xsd:boolean"
+    },
+    "RecipientCommon": "bankid:RecipientCommon",
+    "nameB64": {
+      "@id": "bankid:nameB64",
+      "@type": "xsd:string"
+    },
+    "UserVisibleTransactionCardNpaParentType": "bankid:UserVisibleTransactionCardNpaParentType",
+    "auth_request_requirement": "bankid:auth_request_requirement",
+    "certificatePolicies": {
+      "@id": "bankid:certificatePolicies",
+      "@container": "@list"
+    },
+    "mrtd": {
+      "@id": "bankid:mrtd",
+      "@type": "xsd:boolean"
+    },
+    "personalNumber": {
+      "@id": "bankid:personalNumber",
+      "@type": "xsd:string"
+    },
+    "pinCode": {
+      "@id": "bankid:pinCode",
+      "@type": "xsd:boolean"
+    },
+    "stepUp": {
+      "@id": "bankid:stepUp",
+      "@container": "@list"
+    },
+    "auth_request": "bankid:auth_request",
+    "endUserIp": {
+      "@id": "bankid:endUserIp",
+      "@type": "xsd:string"
+    },
+    "returnRisk": {
+      "@id": "bankid:returnRisk",
+      "@type": "xsd:boolean"
+    },
+    "returnUrl": {
+      "@id": "bankid:returnUrl",
+      "@type": "xsd:string"
+    },
+    "userNonVisibleData": {
+      "@id": "bankid:userNonVisibleData",
+      "@type": "xsd:string"
+    },
+    "userVisibleData": {
+      "@id": "bankid:userVisibleData",
+      "@type": "xsd:string"
+    },
+    "requirement": {
+      "@id": "bankid:requirement",
+      "@type": "@id"
+    },
+    "sign_request_requirement": "bankid:sign_request_requirement",
+    "sign_request": "bankid:sign_request",
+    "payment_request_requirement": "bankid:payment_request_requirement",
+    "payment_request": "bankid:payment_request",
+    "riskFlags": {
+      "@id": "bankid:riskFlags",
+      "@container": "@list"
+    },
+    "userVisibleTransaction": {
+      "@id": "bankid:userVisibleTransaction",
+      "@type": "@id"
+    },
+    "paymentBulk_request": "bankid:paymentBulk_request",
+    "userVisibleTransactionBulk": {
+      "@id": "bankid:userVisibleTransactionBulk",
+      "@type": "@id"
+    },
+    "phoneAuth_request_requirement": "bankid:phoneAuth_request_requirement",
+    "phoneAuth_request": "bankid:phoneAuth_request",
+    "phoneSign_request_requirement": "bankid:phoneSign_request_requirement",
+    "phoneSign_request": "bankid:phoneSign_request",
+    "phonePayment_request": "bankid:phonePayment_request",
+    "phonePaymentBulk_request": "bankid:phonePaymentBulk_request",
+    "otherPayment_request_requirement": "bankid:otherPayment_request_requirement",
+    "otherPayment_request": "bankid:otherPayment_request",
+    "collect_request": "bankid:collect_request",
+    "collect_response_completionData_user": "bankid:collect_response_completionData_user",
+    "name": {
+      "@id": "bankid:name",
+      "@type": "xsd:string"
+    },
+    "givenName": {
+      "@id": "bankid:givenName",
+      "@type": "xsd:string"
+    },
+    "surname": {
+      "@id": "bankid:surname",
+      "@type": "xsd:string"
+    },
+    "collect_response_completionData_device": "bankid:collect_response_completionData_device",
+    "ipAddress": {
+      "@id": "bankid:ipAddress",
+      "@type": "xsd:string"
+    },
+    "uhi": {
+      "@id": "bankid:uhi",
+      "@type": "xsd:string"
+    },
+    "collect_response_completionData_stepUp": "bankid:collect_response_completionData_stepUp",
+    "face": {
+      "@id": "bankid:face",
+      "@type": "xsd:boolean"
+    },
+    "collect_response_completionData": "bankid:collect_response_completionData",
+    "user": {
+      "@id": "bankid:user",
+      "@type": "@id"
+    },
+    "device": {
+      "@id": "bankid:device",
+      "@type": "@id"
+    },
+    "bankIdIssueDate": {
+      "@id": "bankid:bankIdIssueDate",
+      "@type": "xsd:string"
+    },
+    "signature": {
+      "@id": "bankid:signature",
+      "@type": "xsd:string"
+    },
+    "ocspResponse": {
+      "@id": "bankid:ocspResponse",
+      "@type": "xsd:string"
+    },
+    "UserVisibleTransactionBulk_payments_inner_allOf_fromAccount": "bankid:UserVisibleTransactionBulk_payments_inner_allOf_fromAccount",
+    "accountNumber": {
+      "@id": "bankid:accountNumber",
+      "@type": "xsd:string"
+    }
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "BankID API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects BankID's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-15) from openapi/_original/bankid-openapi-openapi.yml.",
+  "dcterms:created": "2026-10-15",
+  "dcterms:source": [
+    "openapi/_original/bankid-openapi-openapi.yml"
+  ]
+}

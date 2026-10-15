@@ -1,0 +1,68 @@
+generated: '2026-10-15'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/_original/bankid-openapi-openapi.yml
+format: custom
+envelope:
+  media_type: application/json
+  schema: error_response
+coverage:
+  operations: 11
+  statuses_declared: 9
+problems:
+- status: 400
+  title: Bad Request
+  description: Bad request.
+  operations: 11
+  media_types:
+  - application/json
+  schema: error_response
+- status: 401
+  title: Unauthorized
+  description: You do not have access to the service.
+  operations: 11
+  media_types: []
+  schema: null
+- status: 403
+  title: Forbidden
+  description: You do not have access to the service.
+  operations: 11
+  media_types: []
+  schema: null
+- status: 404
+  title: Not Found
+  description: An invalid URL path was used.
+  operations: 11
+  media_types: []
+  schema: null
+- status: 405
+  title: Method Not Allowed
+  description: Only HTTP method POST is allowed.
+  operations: 11
+  media_types: []
+  schema: null
+- status: 408
+  title: Request Timeout
+  description: Timeout while transmitting the request.
+  operations: 11
+  media_types: []
+  schema: null
+- status: 415
+  title: Unsupported Media Type
+  description: The type is missing or invalid.
+  operations: 11
+  media_types: []
+  schema: null
+- status: 500
+  title: Internal Server Error
+  description: Internal technical error in the BankID system.
+  operations: 11
+  media_types: []
+  schema: null
+- status: 503
+  title: Service Unavailable
+  description: The service is temporarily unavailable.
+  operations: 11
+  media_types: []
+  schema: null

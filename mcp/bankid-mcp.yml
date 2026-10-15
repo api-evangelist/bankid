@@ -1,0 +1,70 @@
+generated: '2026-10-15'
+method: derived
+generator: derive-mcp-candidate.py
+source:
+- openapi/_original/bankid-openapi-openapi.yml
+status: candidate
+deployment:
+  mode: none
+  auth: unknown
+  verified: probed
+note: 'No MCP server was found. The pre-flight posted tools/list to /mcp on api.bankid.com, bankid.com, app.bankid.com, developers.bankid.com;
+  verdict opaque (https://status.bankid.com/mcp answered 403: the edge authenticates before it routes, which proves nothing either way). Candidate
+  tools below are derived from the 11 operation(s) in the provider''s own OpenAPI (11 listed); they describe what a server WOULD expose, not one
+  that exists.'
+tools:
+- name: auth
+  operationId: auth
+  method: POST
+  path: /auth
+  description: Create an identification order.
+- name: sign
+  operationId: sign
+  method: POST
+  path: /sign
+  description: Create a signature order.
+- name: payment
+  operationId: payment
+  method: POST
+  path: /payment
+  description: Create a payment order.
+- name: payment_bulk
+  operationId: paymentBulk
+  method: POST
+  path: /payment/bulk
+  description: Create a bulk payment order.
+- name: phone_auth
+  operationId: phoneAuth
+  method: POST
+  path: /phone/auth
+  description: Create an identification order for a phone call.
+- name: phone_sign
+  operationId: phoneSign
+  method: POST
+  path: /phone/sign
+  description: Create a signature order for a phone call.
+- name: phone_payment
+  operationId: phonePayment
+  method: POST
+  path: /phone/payment
+  description: Create a payment order for a phone call.
+- name: phone_payment_bulk
+  operationId: phonePaymentBulk
+  method: POST
+  path: /phone/payment/bulk
+  description: Create a bulk payment order for a phone call.
+- name: other_payment
+  operationId: otherPayment
+  method: POST
+  path: /other/payment
+  description: Create a payment order for other situations.
+- name: collect
+  operationId: collect
+  method: POST
+  path: /collect
+  description: Gather order information and status.
+- name: cancel
+  operationId: cancel
+  method: POST
+  path: /cancel
+  description: Cancel a signature, authentication or payment order.

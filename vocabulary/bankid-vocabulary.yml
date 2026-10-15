@@ -1,0 +1,460 @@
+generated: '2026-10-15'
+method: derived
+generator: derive-vocabulary.py
+source: openapi/_original/bankid-openapi-openapi.yml
+vocabulary:
+  name: BankID Domain Vocabulary
+  description: 'Terms declared by BankID''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-15'
+  terms:
+  - term: order_response
+    definition: 'Object declared by the contract with fields: orderRef, autoStartToken, qrStartToken, qrStartSecret.'
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/order_response
+  - term: collect_response
+    definition: 'Object declared by the contract with fields: orderRef, status, completionData, hintCode.'
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/collect_response
+  - term: phone_auth_sign_response
+    definition: 'Object declared by the contract with fields: orderRef.'
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/phone_auth_sign_response
+  - term: error_response
+    definition: Generic error response
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/error_response
+  - term: app
+    definition: Additional data included when creating an order from your app. When starting an order from your app client this data may be included
+      in the request. You can send the parameter `web` or `app`, not both. If providing this parameter, at least one of its members must be specified.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/app
+  - term: endUserIp
+    definition: 'The user IP address as it is seen by your service. IPv4 and IPv6 are allowed. Make sure that the IP address you include as `endUserIp`
+      is the address of your end user''s device, not the internal address of any reverse proxy between you and the end user. In use cases where
+      the IP address is not available, e. g. for voice-based services, the internal representation of those systems'' IP address is ok '
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/endUserIp
+  - term: returnRisk
+    definition: If this is set to `true` a risk indicator will be included in the collect response when the order completes. The risk indication
+      requires that the endUserIp is correct.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/returnRisk
+  - term: returnUrl
+    definition: Orders started on the same device as where the user's BankID is stored (started with autostart token) will call this URL when
+      the order is completed. Any return URL provided in the start URL when the BankID app was launched will be ignored. If the user has a version
+      of the BankID app that does not support getting the `returnUrl` from the server, the order will be cancelled and the user will be ask
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/returnUrl
+  - term: userNonVisibleData_auth
+    definition: Data that you wish to include but not display to the user. The value must be base 64-encoded.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/userNonVisibleData_auth
+  - term: userVisibleData_auth
+    definition: Text displayed to the user during the order. The purpose is to provide context, thereby enabling the user to detect identification
+      errors and avert fraud attempts. The text can be formatted using CR, LF and CRLF for new lines. The text must be encoded as UTF-8 and then
+      base 64 encoded.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/userVisibleData_auth
+  - term: userVisibleDataFormat
+    definition: 'If present and set to `"simpleMarkdownV1"`, this parameter indicates that `userVisibleData` holds formatting characters. The
+      possible values have the following meaning: - `plaintext`: `userVisibleData` contains base 64 encoded text using a sub-set of UTF-8 and
+      CR, LF or CRLF for line breaks.. - `simpleMarkdownV1`: `userVisibleData` contains Simple Markdown version 1. Please see [the documentation]'
+    tags:
+    - Enumeration
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/userVisibleDataFormat
+  - term: web
+    definition: Additional data included when creating an order from your web page. When starting an order from your web page this data may be
+      included in the request. You can send the parameter `web` or `app`, not both. If providing this parameter, at least one of its members must
+      be specified.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/web
+  - term: cardReader
+    definition: 'Whether the user needs to complete the order using a card reader for the signature. The possible values have the following meaning:
+      * `class1`: The order must be confirmed with a card reader where the PIN code is entered on a computer keyboard, or a card reader of higher
+      class. * `class2`: The order must be confirmed with a card reader where the PIN code is entered on the reader. This condition sh'
+    tags:
+    - Enumeration
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/cardReader
+  - term: certificatePolicies
+    definition: 'The OID in certificate policies in the user certificate. One wildcard is allowed from position 5 and forward (`"1.2.752.78.*"`).
+      Available values for production BankIDs are: * `"1.2.752.78.1.1"` - BankID on file * `"1.2.752.78.1.2"` - BankID on card * `"1.2.752.78.1.5"`
+      - Mobile BankID Available values for test BankIDs are: * `"1.2.3.4.5"` - BankID on file * `"1.2.3.4.10"` - BankID on card * `"1.2'
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/certificatePolicies
+  - term: mrtd
+    definition: Whether the user needs to confirm their identity with a valid Swedish passport or national ID card to complete the order. No identity
+      confirmation is required by default.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/mrtd
+  - term: personalNumber
+    definition: The personal identity number allowed to confirm the identification. If a BankID with another personal identity number attempts
+      to confirm the identification, it will fail.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/personalNumber
+  - term: pinCode
+    definition: Users are required to confirm the order with their security code even if they have biometrics activated.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/pinCode
+  - term: stepUp
+    definition: 'Whether the user needs to perform a step up. The possible values have the following meaning: - `mrtd`: Confirm identity with
+      a valid Swedish passport or national ID card to complete the order. - `face`: Confirm identity with facial recognition. Use multiple values
+      to let the user choose between the available identity confirmations. The `requirement.stepUp` property can not be used in combination w'
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/stepUp
+  - term: userNonVisibleData
+    definition: Data that you wish to include but not display to the user. The value must be base 64-encoded.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/userNonVisibleData
+  - term: userVisibleData
+    definition: Text displayed to the user during the order. The purpose is to provide context, thereby enabling the user to detect identification
+      errors and avert fraud attempts. The text can be formatted using CR, LF and CRLF for new lines. The text must be encoded as UTF-8 and then
+      base 64 encoded.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/userVisibleData
+  - term: riskFlags
+    definition: Indicate to the risk assessment system that the payment has a higher risk or is unusual for the user. The riskFlags will not be
+      displayed to the end user.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/riskFlags
+  - term: userNonVisibleData_payment
+    definition: Data that you wish to include but not display to the user. The value must be base 64-encoded.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/userNonVisibleData_payment
+  - term: userVisibleData_payment
+    definition: Text displayed to the user during the order. The purpose is to provide context, thereby enabling the user to detect identification
+      errors and avert fraud attempts. The text can be formatted using CR, LF and CRLF for new lines. The text must be encoded as UTF-8 and then
+      base 64 encoded.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/userVisibleData_payment
+  - term: UserVisibleTransaction
+    definition: Information about the transaction being approved.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/UserVisibleTransaction
+  - term: UserVisibleTransactionBulk
+    definition: Information about the bulk transaction being approved.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/UserVisibleTransactionBulk
+  - term: callInitiator
+    definition: 'Indicates if the user or your organization initiated the phone call. The possible values have the following meaning: * `user`:
+      The user called your organization. * `RP`: Your organization called the user.'
+    tags:
+    - Enumeration
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/callInitiator
+  - term: personalNumber_1
+    definition: The ID number of the user. The ID number is a Swedish national identification number (12 digits).
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/personalNumber_1
+  - term: limited_response
+    definition: 'Object declared by the contract with fields: orderRef.'
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/limited_response
+  - term: returnRisk_other
+    definition: If this is set to `true` a risk indicator will be included in the collect response when the order completes.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/returnRisk_other
+  - term: UserVisibleTransactionCardNpa
+    definition: Information about the transaction being approved.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/UserVisibleTransactionCardNpa
+  - term: orderRef
+    definition: A reference ID for an order. This is used to query the status of the order or to cancel it.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/orderRef
+  - term: autoStartToken
+    definition: Used to compile the start URL.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/autoStartToken
+  - term: qrStartToken
+    definition: Used to compute the animated QR code.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/qrStartToken
+  - term: qrStartSecret
+    definition: Used to compute the animated QR code.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/qrStartSecret
+  - term: status
+    definition: 'The current status of the order. The possible values have the following meaning: - `pending`: The order is being processed. `hintCode`
+      describes the status of the order. - `complete`: The order is complete. completionData holds user information. - `failed`: Something went
+      wrong with the order. `hintCode` describes the error.'
+    tags:
+    - Enumeration
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/status
+  - term: ipAddress
+    definition: The IP address of the user agent as the BankID server sees it. When an order is started with `autoStartToken` you can check that
+      it matches the IP you service observes to ensure session fixation.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/ipAddress
+  - term: uhi
+    definition: Unique hardware identifier for the user's device.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/uhi
+  - term: mrtd_1
+    definition: Whether an MRTD check was performed before the order was completed.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/mrtd_1
+  - term: face
+    definition: Whether order was stepped up with facial recognition.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/face
+  - term: bankIdIssueDate
+    definition: The date the BankID was issued to the user. The issue date is expressed using date format YYYY-MM-DD with a suffix 'Z' to indicate
+      UTC time zone offset.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/bankIdIssueDate
+  - term: signature
+    definition: The signature that is the result of the order. This is a base 64 encoded XML signature string.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/signature
+  - term: ocspResponse
+    definition: 'The OCSP response. This is a base 64 encoded OCSP response. The OCSP response is signed by a certificate that has the same issuer
+      as the certificate being verified, and it has a nonce extension. The nonce is calculated as: * SHA-1 hash over the base 64 XML signature
+      encoded as UTF-8. * 12 random bytes added after the hash. The nonce is 32 bytes (20 + 12).'
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/ocspResponse
+  - term: risk
+    definition: 'Indicates the risk level of the order based on data available in the order. The possible values have the following meaning: -
+      `low`: No or low risk identified in the available order data. - `moderate`: Might require further action, investigation or follow-up by
+      you based on the order data. - `high`: The order should be blocked or cancelled by you and needs further action, investigation or follow-u'
+    tags:
+    - Enumeration
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/risk
+  - term: hintCode
+    definition: When an order is pending, you should use the hintCode to provide the user with details and instructions and keep calling collect
+      until order fails or is complete. hintCode Reason Action by your service outstandingTransaction Order is pending. The BankID app has not
+      received the order yet. The hintCode will later change to noClient, started or userSign. If you tried to launch the user's client auto
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/hintCode
+  - term: TransactionBulk
+    definition: 'Object declared by the contract with fields: transactionType, date, riskWarning.'
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/TransactionBulk
+  - term: money
+    definition: Object that sets monetary amount for the payment.If the transactionType is npa this isn't allowed to be set.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/Money
+  - term: RecipientGenericBulk
+    definition: Displayed name and account number for the recipient of the payment.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/RecipientGenericBulk
+  - term: ThirdPartyInitiatorB64
+    definition: The third party initiating the payment. Should be a base64 encoded utf-8 string with a maximum length of 40 unicode code points.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/ThirdPartyInitiatorB64
+  - term: UserVisibleTransactionParentType
+    definition: 'Object declared by the contract with fields: transactionType, date, riskWarning, recurring, thirdPartyInitiatorB64.'
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/UserVisibleTransactionParentType
+  - term: recipientCard
+    definition: Displayed name for the recipient of the payment. Exactly one of `name` and `nameB64` must be populated.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/RecipientCard
+  - term: recipientNpa
+    definition: Displayed name for the recipient of the payment. Exactly one of `name` and `nameB64` must be populated.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/RecipientNpa
+  - term: recipientBankgiro
+    definition: Displayed name and account number for the recipient of the payment.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/RecipientBankgiro
+  - term: recipientPlusgiro
+    definition: Displayed name and account number for the recipient of the payment.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/RecipientPlusgiro
+  - term: recipientSameBank
+    definition: Displayed name and account number for the recipient of the payment.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/RecipientSameBank
+  - term: recipientDomesticBank
+    definition: Displayed name and account number for the recipient of the payment.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/RecipientDomesticBank
+  - term: recipientForeignBank
+    definition: Displayed name and account number for the recipient of the payment.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/RecipientForeignBank
+  - term: riskWarning
+    definition: Indicate to the user that the payment has higher risk or is unusual for the user. This will be indicated in the UI. riskWarning
+      text displayed to user newRecipient New recipient largeAmount Large amount foreignCurrency Foreign currency cryptoCurrencyPurchase Purchase
+      of crypto currency moneyTransfer Money transfer overseasTransaction International payment recurringPayment Recurring payment partial
+    tags:
+    - Enumeration
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/riskWarning
+  - term: RecipientCommon
+    definition: 'Object declared by the contract with fields: nameB64.'
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/RecipientCommon
+  - term: UserVisibleTransactionCardNpaParentType
+    definition: 'Object declared by the contract with fields: transactionType, date, riskWarning, recurring, thirdPartyInitiatorB64.'
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/UserVisibleTransactionCardNpaParentType
+  - term: auth_request_requirement
+    definition: Requirements on how the authentication order must be performed.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/auth_request_requirement
+  - term: auth_request
+    definition: 'Object declared by the contract with fields: app, endUserIp, returnRisk, returnUrl, userNonVisibleData, userVisibleData, userVisibleDataFormat,
+      web, requirement.'
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/auth_request
+  - term: sign_request_requirement
+    definition: Requirements on how the signature order must be performed.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/sign_request_requirement
+  - term: sign_request
+    definition: 'Object declared by the contract with fields: app, endUserIp, returnRisk, returnUrl, userNonVisibleData, userVisibleData, userVisibleDataFormat,
+      web, requirement.'
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/sign_request
+  - term: payment_request_requirement
+    definition: Requirements on how the payment order must be performed.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/payment_request_requirement
+  - term: payment_request
+    definition: 'Object declared by the contract with fields: app, endUserIp, returnRisk, returnUrl, riskFlags, userNonVisibleData, userVisibleData,
+      userVisibleDataFormat, userVisibleTransaction, web, requirement.'
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/payment_request
+  - term: paymentBulk_request
+    definition: 'Object declared by the contract with fields: app, endUserIp, returnRisk, returnUrl, userNonVisibleData, userVisibleData, userVisibleTransactionBulk,
+      web, requirement.'
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/paymentBulk_request
+  - term: phoneAuth_request_requirement
+    definition: Requirements on how the authentication order must be performed.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/phoneAuth_request_requirement
+  - term: phoneAuth_request
+    definition: 'Object declared by the contract with fields: callInitiator, personalNumber, userNonVisibleData, userVisibleData, userVisibleDataFormat,
+      requirement.'
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/phoneAuth_request
+  - term: phoneSign_request_requirement
+    definition: Requirements on how the signature order must be performed.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/phoneSign_request_requirement
+  - term: phoneSign_request
+    definition: 'Object declared by the contract with fields: callInitiator, personalNumber, userNonVisibleData, userVisibleData, userVisibleDataFormat,
+      requirement.'
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/phoneSign_request
+  - term: phonePayment_request
+    definition: 'Object declared by the contract with fields: callInitiator, personalNumber, riskFlags, userNonVisibleData, userVisibleData, userVisibleDataFormat,
+      userVisibleTransaction, requirement.'
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/phonePayment_request
+  - term: phonePaymentBulk_request
+    definition: 'Object declared by the contract with fields: callInitiator, personalNumber, userNonVisibleData, userVisibleData, userVisibleTransactionBulk,
+      requirement.'
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/phonePaymentBulk_request
+  - term: otherPayment_request_requirement
+    definition: Requirements on how the payment order must be performed.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/otherPayment_request_requirement
+  - term: otherPayment_request
+    definition: 'Object declared by the contract with fields: app, personalNumber, returnRisk, riskFlags, returnUrl, userNonVisibleData, userVisibleData,
+      userVisibleDataFormat, userVisibleTransaction, web, requirement.'
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/otherPayment_request
+  - term: collect_request
+    definition: 'Object declared by the contract with fields: orderRef.'
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/collect_request
+  - term: collect_response_completionData_user
+    definition: Information related to the user.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/collect_response_completionData_user
+  - term: collect_response_completionData_device
+    definition: Information related to the device.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/collect_response_completionData_device
+  - term: collect_response_completionData_stepUp
+    definition: Information about additional verifications that were part of the order.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/collect_response_completionData_stepUp
+  - term: collect_response_completionData
+    definition: Information about the user and the completed order. The user has completed the order. `completionData` includes the signature,
+      user information and the OCSP response. You should verify user information to proceed. You should retain completion data for future reference,
+      compliance and audit purposes.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/collect_response_completionData
+  - term: UserVisibleTransactionBulk_payments_inner_allOf_fromAccount
+    definition: The account the payment is taken from. Items adjacent to each other in `payments` will be grouped together if share the same `fromAccount`
+      values. Either `nameB64` or `accountNumber` is required.
+    tags:
+    - Object
+    source: openapi/_original/bankid-openapi-openapi.yml#/components/schemas/UserVisibleTransactionBulk_payments_inner_allOf_fromAccount
