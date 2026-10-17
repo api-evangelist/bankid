@@ -90,14 +90,148 @@ apis:
   humanURL: https://developers.bankid.com/api-references/id-card/overview
   baseURL: https://idcardapi.bankid.com/rp/v1
   aid: bankid:id-card-verification-api
-- aid: bankid:relying-party-api-openapi-api
-  name: Relying Party API Openapi API
-  description: BankID Relying Party API v6.0
-  humanURL: https://developers.bankid.com/llms.txt
-  baseURL: https://appapi2.test.bankid.com/rp/v6.0
+- aid: bankid:bankid-auth-api
+  name: BankID Auth API
+  description: The Auth API from BankID — 1 operation(s) for auth.
+  humanURL: https://developers.bankid.com/api-references/auth--sign/overview
+  baseURL: https://appapi2.bankid.com/rp/v6.0
+  tags:
+  - Auth
   properties:
   - type: OpenAPI
-    url: openapi/_original/bankid-openapi-openapi.yml
+    url: openapi/bankid-auth-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/bankid-collect-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-payment-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-other-payment-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-payment-bulk-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-sign-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-auth-request-schema.json
+- aid: bankid:bankid-cancel-api
+  name: BankID Cancel API
+  description: The Cancel API from BankID — 1 operation(s) for cancel.
+  humanURL: https://developers.bankid.com/api-references/auth--sign/overview
+  baseURL: https://appapi2.bankid.com/rp/v6.0
+  tags:
+  - Cancel
+  properties:
+  - type: OpenAPI
+    url: openapi/bankid-cancel-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/bankid-collect-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-payment-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-other-payment-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-payment-bulk-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-sign-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-auth-request-schema.json
+- aid: bankid:bankid-collect-api
+  name: BankID Collect API
+  description: The Collect API from BankID — 1 operation(s) for collect.
+  humanURL: https://developers.bankid.com/api-references/auth--sign/overview
+  baseURL: https://appapi2.bankid.com/rp/v6.0
+  tags:
+  - Collect
+  properties:
+  - type: OpenAPI
+    url: openapi/bankid-collect-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/bankid-collect-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-payment-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-other-payment-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-payment-bulk-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-sign-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-auth-request-schema.json
+- aid: bankid:bankid-other-api
+  name: BankID Other API
+  description: The Other API from BankID — 1 operation(s) for other.
+  humanURL: https://developers.bankid.com/api-references/auth--sign/overview
+  baseURL: https://appapi2.bankid.com/rp/v6.0
+  tags:
+  - Other
+  properties:
+  - type: OpenAPI
+    url: openapi/bankid-other-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/bankid-collect-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-payment-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-other-payment-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-payment-bulk-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-sign-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-auth-request-schema.json
+- aid: bankid:bankid-payment-api
+  name: BankID Payment API
+  description: The Payment API from BankID — 2 operation(s) for payment.
+  humanURL: https://developers.bankid.com/api-references/auth--sign/overview
+  baseURL: https://appapi2.bankid.com/rp/v6.0
+  tags:
+  - Payment
+  properties:
+  - type: OpenAPI
+    url: openapi/bankid-payment-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/bankid-collect-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-payment-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-other-payment-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-payment-bulk-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-sign-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-auth-request-schema.json
+- aid: bankid:bankid-phone-api
+  name: BankID Phone API
+  description: The Phone API from BankID — 4 operation(s) for phone.
+  humanURL: https://developers.bankid.com/api-references/auth--sign/overview
+  baseURL: https://appapi2.bankid.com/rp/v6.0
+  tags:
+  - Phone
+  properties:
+  - type: OpenAPI
+    url: openapi/bankid-phone-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/bankid-collect-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-payment-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-other-payment-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-payment-bulk-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-sign-request-schema.json
+  - type: JSONSchema
+    url: json-schema/bankid-auth-request-schema.json
+- aid: bankid:bankid-sign-api
+  name: BankID Sign API
+  description: The Sign API from BankID — 1 operation(s) for sign.
+  humanURL: https://developers.bankid.com/api-references/auth--sign/overview
+  baseURL: https://appapi2.bankid.com/rp/v6.0
+  tags:
+  - Sign
+  properties:
+  - type: OpenAPI
+    url: openapi/bankid-sign-api-openapi.yml
   - type: JSONSchema
     url: json-schema/bankid-collect-response-schema.json
   - type: JSONSchema

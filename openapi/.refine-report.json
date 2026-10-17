@@ -1,0 +1,42 @@
+{
+  "provider": "bankid",
+  "sources": [
+    "_original/bankid-openapi-openapi.yml"
+  ],
+  "outputs": [
+    "bankid-auth-api-openapi.yml",
+    "bankid-cancel-api-openapi.yml",
+    "bankid-collect-api-openapi.yml",
+    "bankid-other-api-openapi.yml",
+    "bankid-payment-api-openapi.yml",
+    "bankid-phone-api-openapi.yml",
+    "bankid-sign-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "bankid-openapi-openapi.yml: upgraded openapi 3.0.4 -> OpenAPI 3.2.0",
+    "bankid-openapi-openapi.yml: tagged paths POST /auth -> Auth",
+    "bankid-openapi-openapi.yml: tagged paths POST /sign -> Sign",
+    "bankid-openapi-openapi.yml: tagged paths POST /payment -> Payment",
+    "bankid-openapi-openapi.yml: tagged paths POST /payment/bulk -> Payment",
+    "bankid-openapi-openapi.yml: tagged paths POST /phone/auth -> Phone",
+    "bankid-openapi-openapi.yml: tagged paths POST /phone/sign -> Phone",
+    "bankid-openapi-openapi.yml: tagged paths POST /phone/payment -> Phone",
+    "bankid-openapi-openapi.yml: tagged paths POST /phone/payment/bulk -> Phone",
+    "bankid-openapi-openapi.yml: tagged paths POST /other/payment -> Other",
+    "bankid-openapi-openapi.yml: tagged paths POST /collect -> Collect",
+    "bankid-openapi-openapi.yml: tagged paths POST /cancel -> Cancel",
+    "bankid-openapi-openapi.yml: declared missing tag: Auth",
+    "bankid-openapi-openapi.yml: declared missing tag: Cancel",
+    "bankid-openapi-openapi.yml: declared missing tag: Collect",
+    "bankid-openapi-openapi.yml: declared missing tag: Other",
+    "bankid-openapi-openapi.yml: declared missing tag: Payment",
+    "bankid-openapi-openapi.yml: declared missing tag: Phone",
+    "bankid-openapi-openapi.yml: declared missing tag: Sign",
+    "apis.yml register: written (+7 apis, 9 total)"
+  ],
+  "skipped": []
+}

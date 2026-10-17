@@ -1,0 +1,446 @@
+openapi: 3.2.0
+info:
+  description: BankID Relying Party API v6.0
+  license:
+    name: BankID Privacy policy
+    url: https://www.bankid.com/en/integritetspolicy
+  title: Relying Party Auth API
+  version: 6.1.11
+servers:
+- description: Test server
+  url: https://appapi2.test.bankid.com/rp/v6.0
+- description: Production server
+  url: https://appapi2.bankid.com/rp/v6.0
+tags:
+- name: Auth
+paths:
+  /auth:
+    post:
+      description: 'Initiates an identification order.
+
+
+        Use the `/collect` method to query the status of the order.'
+      operationId: auth
+      requestBody:
+        content:
+          application/json:
+            examples:
+              app:
+                summary: An app started authentication
+                value:
+                  endUserIp: 192.168.1.2
+                  returnUrl: https://bankid.example/auth/login_page#nonce=a3618c72-bc71-4002-b3de-509555b175db
+                  userVisibleData: IFRoaXMgaXMgYSBzYW1wbGUgdGV4dCB0byBiZSBzaWduZWQ=
+                  returnRisk: true
+                  app:
+                    appIdentifier: com.imadethisup
+                    deviceOS: IOS 16.7.7
+                    deviceModelName: Apple iPhone14,3
+                    deviceIdentifier: f1e3813ab36f114d4b0c2b3636617511467adb353ce8e5ae6c83500d932f2269
+              web:
+                summary: A web started authentication
+                value:
+                  endUserIp: 192.168.1.2
+                  returnUrl: https://bankid.example/auth/login_page#nonce=a3618c72-bc71-4002-b3de-509555b175db
+                  userVisibleData: IFRoaXMgaXMgYSBzYW1wbGUgdGV4dCB0byBiZSBzaWduZWQ=
+                  returnRisk: true
+                  web:
+                    referringDomain: example.com
+                    userAgent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/114.0
+                    deviceIdentifier: f1e3813ab36f114d4b0c2b3636617511467adb353ce8e5ae6c83500d932f2269
+              personalNumber:
+                summary: A personal number requirement with user visible data
+                value:
+                  endUserIp: 192.168.1.2
+                  returnUrl: https://bankid.example/auth/login_page#nonce=a3618c72-bc71-4002-b3de-509555b175db
+                  userVisibleData: IFRoaXMgaXMgYSBzYW1wbGUgdGV4dCB0byBiZSBzaWduZWQ=
+                  requirement:
+                    personalNumber: '200001012384'
+              simple:
+                summary: Simple request
+                value:
+                  endUserIp: 192.168.1.2
+                  returnUrl: https://bankid.example/auth/login_page#nonce=a3618c72-bc71-4002-b3de-509555b175db
+              stepUp:
+                summary: Require the user to perform a step up by either verifying ID document or using facial recognition
+                value:
+                  endUserIp: 192.168.1.2
+                  requirement:
+                    stepUp:
+                    - mrtd
+                    - face
+            schema:
+              $ref: '#/components/schemas/auth_request'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/order_response'
+          description: Request successful.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+          description: Bad request.
+        '401':
+          description: You do not have access to the service.
+        '403':
+          description: You do not have access to the service.
+        '404':
+          description: An invalid URL path was used.
+        '405':
+          description: Only HTTP method POST is allowed.
+        '408':
+          description: Timeout while transmitting the request.
+        '415':
+          description: The type is missing or invalid.
+        '500':
+          description: Internal technical error in the BankID system.
+        '503':
+          description: The service is temporarily unavailable.
+      summary: Create an identification order
+      tags:
+      - Auth
+components:
+  schemas:
+    auth_request:
+      properties:
+        app:
+          $ref: '#/components/schemas/app'
+        endUserIp:
+          description: 'The user IP address as it is seen by your service.
+
+
+            IPv4 and IPv6 are allowed.
+
+
+            Make sure that the IP address you include as `endUserIp` is the address of your end user''s device, not the internal
+
+            address of any reverse proxy between you and the end user.
+
+
+            In use cases where the IP address is not available, e. g. for voice-based services, the internal representation of
+
+            those systems'' IP address is ok to use.'
+          example: 192.168.1.2
+          type: string
+        returnRisk:
+          description: 'If this is set to `true` a risk indicator will be included in the collect response when the order completes.
+
+            The risk indication requires that the endUserIp is correct.'
+          example: true
+          type: boolean
+        returnUrl:
+          description: 'Orders started on the same device as where the user''s BankID is stored (started with autostart token) will call
+
+            this URL when the order is completed.
+
+
+            Any return URL provided in the start URL when the BankID app was launched will be ignored. If the user has a
+
+            version of the BankID app that does not support getting the `returnUrl` from the server, the order will be
+
+            cancelled and the user will be asked to update their app.
+
+
+            The return URL you provide should include a nonce to the session. When the user returns to your app or web page,
+
+            your service should verify that the order was completed successfully and that the device receiving the
+
+            `returnUrl` is the same device that started the order.
+
+
+            Using this parameter will make your service more secure and strengthen the channel binding between you and the
+
+            user.
+
+
+            Ensure that the cookie or user IP address has not changed from the starting page to the `returnUrl` page.'
+          example: https://bankid.example/auth/login_page#nonce=a3618c72-bc71-4002-b3de-509555b175db
+          maxLength: 512
+          minLength: 1
+          type: string
+        userNonVisibleData:
+          description: 'Data that you wish to include but not display to the user.
+
+
+            The value must be base 64-encoded.'
+          example: VGV4dCBpbmNsdWRlZCBidXQgbm90IGRpc3BsYXllZCB0byB0aGUgdXNlcg==
+          maxLength: 1500
+          minLength: 1
+          type: string
+        userVisibleData:
+          description: 'Text displayed to the user during the order.
+
+
+            The purpose is to provide context, thereby enabling the user to detect identification errors and avert fraud
+
+            attempts.
+
+
+            The text can be formatted using CR, LF and CRLF for new lines. The text must be encoded as UTF-8 and then base 64
+
+            encoded.'
+          example: VGhpcyBpcyBhIHNhbXBsZSB0ZXh0Cg==
+          maxLength: 1500
+          minLength: 1
+          type: string
+        userVisibleDataFormat:
+          $ref: '#/components/schemas/userVisibleDataFormat'
+        web:
+          $ref: '#/components/schemas/web'
+        requirement:
+          $ref: '#/components/schemas/auth_request_requirement'
+      required:
+      - endUserIp
+      type: object
+    cardReader:
+      description: "Whether the user needs to complete the order using a card reader for the signature.\n\nThe possible values have the following meaning:\n\n  *  `class1`: The order must be confirmed with a card reader where the PIN code is entered on a computer keyboard,\n     or a card reader of higher class.\n  *  `class2`: The order must be confirmed with a card reader where the PIN code is entered on the reader.\n\nThis condition should always be combined with a `certificatePolicies` for a smart card to avoid undefined\nbehaviour.\n\nNo card reader is required by default."
+      enum:
+      - class1
+      - class2
+      type: string
+    error_response:
+      description: Generic error response
+      example:
+        errorCode: invalidParameters
+        details: Incorrect personalNumber
+      properties:
+        errorCode:
+          description: The error code.
+          example: invalidParameters
+          type: string
+        details:
+          description: Additional details specific to the error code.
+          example: Incorrect personalNumber
+          type: string
+      required:
+      - details
+      - errorCode
+      type: object
+    auth_request_requirement:
+      description: Requirements on how the authentication order must be performed.
+      properties:
+        cardReader:
+          $ref: '#/components/schemas/cardReader'
+        certificatePolicies:
+          description: 'The OID in certificate policies in the user certificate.
+
+
+            One wildcard is allowed from position 5 and forward (`"1.2.752.78.*"`).
+
+
+            Available values for production BankIDs are:
+
+            *  `"1.2.752.78.1.1"` - BankID on file
+
+            *  `"1.2.752.78.1.2"` - BankID on card
+
+            *  `"1.2.752.78.1.5"` - Mobile BankID
+
+
+            Available values for test BankIDs are:
+
+            *  `"1.2.3.4.5"` - BankID on file
+
+            *  `"1.2.3.4.10"` - BankID on card
+
+            *  `"1.2.3.4.25"` - Mobile BankID
+
+            *  `"1.2.752.60.1.6"` - Test BankID for some BankID banks
+
+
+            When using one of the _BankID on card_ policies, the `cardReader` requirement can be used to further restrict the
+
+            type of card reader allowed. If no `cardReader` requirement is passed, all supported kinds of card readers are
+
+            permitted.'
+          example:
+          - 1.2.752.78.1.1
+          items:
+            type: string
+          type: array
+        mrtd:
+          description: 'Whether the user needs to confirm their identity with a valid Swedish passport or national ID card to complete the
+
+            order.
+
+
+            No identity confirmation is required by default.'
+          type: boolean
+        personalNumber:
+          description: 'The personal identity number allowed to confirm the identification.
+
+
+            If a BankID with another personal identity number attempts to confirm the identification, it will fail.'
+          example: '200001012384'
+          maxLength: 12
+          minLength: 12
+          pattern: ^[0-9]*$
+          type: string
+        pinCode:
+          description: Users are required to confirm the order with their security code even if they have biometrics activated.
+          example: false
+          type: boolean
+        stepUp:
+          description: 'Whether the user needs to perform a step up.
+
+
+            The possible values have the following meaning:
+
+            - `mrtd`: Confirm identity with a valid Swedish passport or national ID card to complete the order.
+
+            - `face`: Confirm identity with facial recognition.
+
+
+            Use multiple values to let the user choose between the available identity confirmations.
+
+
+            The `requirement.stepUp` property can not be used in combination with the property `requirement.mrtd`.
+
+
+            Requesting identity confirmation with facial recognition as the only option is not supported.
+
+
+            No identity confirmation is required by default.'
+          items:
+            type: string
+          type: array
+      type: object
+    userVisibleDataFormat:
+      description: "If present and set to `\"simpleMarkdownV1\"`, this parameter indicates that `userVisibleData` holds formatting\ncharacters.\n\nThe possible values have the following meaning:\n\n-  `plaintext`: `userVisibleData` contains base 64 encoded text using a sub-set of UTF-8 and CR, LF or CRLF for\n   line breaks..\n-  `simpleMarkdownV1`: `userVisibleData` contains Simple Markdown version 1.\n\nPlease see\n[the documentation](https://developers.bankid.com/getting-started/backend/formatting-text/syntax-special-characters-and-rendering)\nfor more information about the format."
+      enum:
+      - plaintext
+      - simpleMarkdownV1
+      type: string
+    web:
+      description: 'Additional data included when creating an order from your web page.
+
+
+        When starting an order from your web page this data may be included in the request.
+
+
+        You can send the parameter `web` or `app`, not both. If providing this parameter, at least one of its members must
+
+        be specified.'
+      properties:
+        deviceIdentifier:
+          description: 'The identifier of the device running your client.
+
+
+            Do not use a session cookie. Use a separate cookie or the hash of one.
+
+
+            This value should be unique to the user''s browser and persist across sessions.'
+          example: e753b91e-9c84-4441-aadb-0832f4c71fac
+          maxLength: 64
+          minLength: 1
+          type: string
+        referringDomain:
+          description: 'The domain that starts the BankID app.
+
+
+            This should generally be your domain name followed by the public suffix, which will generally be the top level
+
+            domain.
+
+
+            Only the digits 0 to 9, the letters a to z, dot (".") and dash ("-") are allowed. When using an International
+
+            Domain Name, the string must be punycode encoded.'
+          example: example.com
+          maxLength: 253
+          minLength: 3
+          pattern: '[0-9a-z-.]*'
+          type: string
+        userAgent:
+          description: The user agent of the user interacting with your web page.
+          example: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1
+          maxLength: 512
+          minLength: 1
+          type: string
+      type: object
+    app:
+      description: 'Additional data included when creating an order from your app.
+
+
+        When starting an order from your app client this data may be included in the request.
+
+
+        You can send the parameter `web` or `app`, not both. If providing this parameter, at least one of its members must
+
+        be specified.'
+      properties:
+        appIdentifier:
+          description: 'The identifier of your application.
+
+
+            This is the package name on Android and the bundle identifier on iOS.
+
+
+            It is vital to use the correct value. If your service does not supply the correct value legitimate orders might
+
+            be blocked.'
+          example: se.demobank.app1
+          maxLength: 256
+          minLength: 2
+          type: string
+        deviceOS:
+          description: The device operating system where your app is running.
+          example: ANDROID 14.0
+          maxLength: 128
+          minLength: 1
+          type: string
+        deviceIdentifier:
+          description: 'The identifier of the device your client is running on.
+
+
+            This is used to uniquely identify the device and should be a value that is not tied to a single user of the
+
+            device. Preferably, it should remain the same even if your app is reinstalled.'
+          example: e753b91e-9c84-4441-aadb-0832f4c71fac
+          maxLength: 64
+          minLength: 1
+          type: string
+        deviceModelName:
+          description: The model of the device your app is running on.
+          example: Apple iPhone14,3
+          maxLength: 128
+          minLength: 1
+          type: string
+      type: object
+    order_response:
+      example:
+        orderRef: 131daac9-16c6-4618-beb0-365768f37288
+        autoStartToken: 7c40b5c9-fa74-49cf-b98c-bfe651f9a7c6
+        qrStartToken: 67df3917-fa0d-44e5-b327-edcc928297f8
+        qrStartSecret: d28db9a7-4cde-429e-a983-359be676944c
+      properties:
+        orderRef:
+          description: 'A reference ID for an order.
+
+
+            This is used to query the status of the order or to cancel it.'
+          example: 131daac9-16c6-4618-beb0-365768f37288
+          type: string
+        autoStartToken:
+          description: Used to compile the start URL.
+          example: 7c40b5c9-fa74-49cf-b98c-bfe651f9a7c6
+          type: string
+        qrStartToken:
+          description: Used to compute the animated QR code.
+          example: 67df3917-fa0d-44e5-b327-edcc928297f8
+          type: string
+        qrStartSecret:
+          description: Used to compute the animated QR code.
+          example: d28db9a7-4cde-429e-a983-359be676944c
+          type: string
+      required:
+      - autoStartToken
+      - orderRef
+      - qrStartSecret
+      - qrStartToken
+      type: object

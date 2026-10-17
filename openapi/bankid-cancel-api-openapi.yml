@@ -1,0 +1,100 @@
+openapi: 3.2.0
+info:
+  description: BankID Relying Party API v6.0
+  license:
+    name: BankID Privacy policy
+    url: https://www.bankid.com/en/integritetspolicy
+  title: Relying Party Cancel API
+  version: 6.1.11
+servers:
+- description: Test server
+  url: https://appapi2.test.bankid.com/rp/v6.0
+- description: Production server
+  url: https://appapi2.bankid.com/rp/v6.0
+tags:
+- name: Cancel
+paths:
+  /cancel:
+    post:
+      description: 'Cancels an ongoing order.
+
+
+        This is typically used if the user cancels the order in your service or app.'
+      operationId: cancel
+      requestBody:
+        content:
+          application/json:
+            examples:
+              simple:
+                summary: A request identifying the order to cancel
+                value:
+                  orderRef: 131daac9-16c6-4618-beb0-365768f37288
+            schema:
+              $ref: '#/components/schemas/collect_request'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/empty_response'
+          description: Request successful.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+          description: Bad request.
+        '401':
+          description: You do not have access to the service.
+        '403':
+          description: You do not have access to the service.
+        '404':
+          description: An invalid URL path was used.
+        '405':
+          description: Only HTTP method POST is allowed.
+        '408':
+          description: Timeout while transmitting the request.
+        '415':
+          description: The type is missing or invalid.
+        '500':
+          description: Internal technical error in the BankID system.
+        '503':
+          description: The service is temporarily unavailable.
+      summary: Cancel a signature, authentication or payment order
+      tags:
+      - Cancel
+components:
+  schemas:
+    empty_response:
+      type: object
+    error_response:
+      description: Generic error response
+      example:
+        errorCode: invalidParameters
+        details: Incorrect personalNumber
+      properties:
+        errorCode:
+          description: The error code.
+          example: invalidParameters
+          type: string
+        details:
+          description: Additional details specific to the error code.
+          example: Incorrect personalNumber
+          type: string
+      required:
+      - details
+      - errorCode
+      type: object
+    collect_request:
+      properties:
+        orderRef:
+          description: 'A reference ID for an order.
+
+
+            This is used to query the status of the order or to cancel it.'
+          example: 131daac9-16c6-4618-beb0-365768f37288
+          type: string
+      required:
+      - orderRef
+      type: object
